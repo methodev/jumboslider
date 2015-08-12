@@ -1,0 +1,51 @@
+{
+  "name": "jumboslider",
+  "title": "jQuery JumboSlider Plugin",
+  "description": "Yet another responsive slider for any kind of content",
+  "keywords": [
+    "jumboslider",
+    "slider",
+    "slideshow",
+    "jumbotron",
+    "gallery",
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "jQuery",
+    "plugin"
+  ],
+  "version": "0.1.0",
+  "homepage": "http://jumboslider.martinmetodiev.com",
+  "authors": [
+    {
+      "name": "Martin Metodiev",
+      "email": "metodiev.martin@gmail.com",
+      "url": "http://martinmetodiev.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/martinmethod/jumboslider.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "git://github.com/jquery/jquery.git"
+  },
+  "main": [
+    "dist/js/jquery.jumboslider.js",
+    "dist/js/jquery.jumboslider.min.js",
+    "dist/js/jquery.jumboslider.min.js.map",
+    "dist/css/jumboslider.css",
+    "dist/css/jumboslider.min.css",
+    "dist/css/jumboslider.min.css.map"
+  ],
+  "ignore": [
+    "**/.*",
+    "demo_components",
+    ".bowerrc",
+    ".csslintrc",
+    ".jshintrc",
+    "Gruntfile.js",
+    "index.html",
+    "package.json"
+  ]
+}

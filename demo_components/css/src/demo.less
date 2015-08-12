@@ -1,0 +1,104 @@
+//
+// Demo styles
+// --------------------------------------------------
+
+
+//== Collections
+// -------------------------
+
+@import "http://martinmetodiev.com/plugins/css/src/collections/variables.less";
+@import "http://martinmetodiev.com/plugins/css/src/collections/mixins.less";
+
+
+//== General
+// -------------------------
+
+.demo-holder {
+    
+    .content {
+        img { display: block; }
+
+        .jumboslider-paginated { margin-bottom: 80px; }
+        .jumboslider:not(.jumboslider-paginated) { margin-bottom: 50px; }
+
+        .demo-jumbotron {
+            height: 200px;
+                
+            .jumboslider-viewport {
+                height: 200px;
+                overflow: hidden;
+            }
+            
+            .jumbotron {
+                display: table;
+                width: 100%;
+                height: 200px;
+                background: #CCC;
+                text-align: center;
+                
+                p {
+                    display: table-cell;
+                    padding: 2% 12%;
+                    vertical-align: middle;
+                    color: #FFF;
+                    font-size: 200%;
+                    line-height: 1.2;
+                    font-weight: bold;
+                }
+
+                &:nth-child(1) { background-color: rgb( 51, 102, 204); }
+                &:nth-child(2) { background-color: rgb( 80, 169, 126); }
+                &:nth-child(3) { background-color: rgb(247, 170,  66); }
+                &:nth-child(4) { background-color: rgb(188,  97,  97); }
+            }
+        }
+
+        .demo-iframe {
+            .jumboslider-item {
+                position: relative;
+                padding-top: 20.86%;
+                
+                .holder {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    
+                    iframe {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+        .demo-loop {
+            .controllers {
+                margin-bottom: 10px;
+                
+                .prev { float: left;  }
+                .next { float: right; }
+
+                .textfield {
+                    width: 50px;
+                    text-align: right;
+                }
+
+                .custom-slide-btn {
+                    position: relative;
+                    top: -2px;
+                }
+            }
+
+            .custom-controller { text-align: center; }
+        }
+    }
+
+}
+
+.mobile .non-mobile {
+    .content { display: none; }
+    
+    &:after { content: 'This plugin is not available for mobile devices.'; }
+}

@@ -7,7 +7,7 @@
 */
 
 
-(function($) {
+;(function($) {
 
 'use strict';
 
@@ -30,7 +30,7 @@ var plugin = {
                 // autoDuration: 3000
             }
         },
-            
+
         events: [
             'onSlide',          // e, data
             'onArrowClick',     // e, data
@@ -191,7 +191,7 @@ var plugin = {
                         case 37: direction = 'prev'; break;
                         case 39: direction = 'next'; break;
                     }
-                
+
                     obj.setPosition( obj.calculatePosition(direction) );
                 }
 

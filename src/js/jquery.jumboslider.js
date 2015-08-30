@@ -1,5 +1,5 @@
 /*!
-  jQuery JumboSlider Plugin v1.0.1
+  jQuery JumboSlider Plugin v1.0.2
   http://jumboslider.martinmetodiev.com
 
   Copyright (c) 2015 Martin Metodiev
@@ -76,16 +76,22 @@ var plugin = {
                 var options = {},
                     events = {};
 
-                for (var option in plugin.base.options) {
-                    options[option] = params && params.hasOwnProperty(option) ?
-                    params[option] : plugin.base.options[option];
-                }
-
-                for (var event = 0; event < plugin.events.length; event++) {
-                    if (params && params.hasOwnProperty(plugin.events[event])) {
-                        events[plugin.events[event]] = params[plugin.events[event]];
+                (function() {
+                    for (var option in plugin.base.options) {
+                        if (plugin.base.options.hasOwnProperty(option)) {
+                            options[option] = params && params.hasOwnProperty(option) ?
+                                params[option] : plugin.base.options[option];
+                        }
                     }
-                }
+                }());
+
+                (function() {
+                    for (var event = 0; event < plugin.events.length; event++) {
+                        if (params && params.hasOwnProperty(plugin.events[event])) {
+                            events[plugin.events[event]] = params[plugin.events[event]];
+                        }
+                    }
+                }());
 
                 $.extend(options, {events: events});
 
@@ -119,7 +125,9 @@ var plugin = {
 
                 // Bind provided events
                 for (var event in obj.options.events) {
-                    obj.bind(event, obj.options.events[event]);
+                    if (obj.options.events.hasOwnProperty(event)) {
+                        obj.bind(event, obj.options.events[event]);
+                    }
                 }
 
                 // Bind window resize event to update jumboslides position & fluid width

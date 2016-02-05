@@ -249,8 +249,12 @@ var plugin = {
                         transit: obj.transit,
                         
                         controllers: function() {
-                            if (obj.options.pagination) { obj.pagination.update(); }
-                            if (obj.options.arrows) { obj.arrows.update(); }
+                            if (obj.options.pagination && obj.items.length > 1) {
+                                obj.pagination.update();
+                            }
+                            if (obj.options.arrows && obj.items.length > 1) {
+                                obj.arrows.update();
+                            }
 
                             return this;
                         }

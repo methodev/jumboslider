@@ -1,4 +1,4 @@
-# jQuery JumboSlider Plugin v1.0.2
+# jQuery JumboSlider Plugin v1.0.3
 
 Yet another responsive slider for any kind of content.
 

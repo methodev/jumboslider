@@ -1,5 +1,5 @@
 /*!
-  jQuery JumboSlider Plugin v1.1.0
+  jQuery JumboSlider Plugin v1.1.1
   http://jumboslider.martinmetodiev.com
 
   Copyright (c) 2015 Martin Metodiev
@@ -435,8 +435,6 @@ var plugin = {
                     var obj = this.jumboslider;
 
                     (function() {
-                        console.log('destroy obj', obj);
-
                         if (obj.options.arrows) {
                             obj.removeClass('jumboslider-arrowed');
                             obj.arrows.remove();

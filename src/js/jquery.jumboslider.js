@@ -418,12 +418,12 @@ var plugin = {
                 return this;
             },
 
-            slideTo: function(pos) {
+            slideTo: function(pos, force) {
                 this.each(function() {
                     var obj = this.jumboslider;
 
                     if (pos !== obj.currentPosition && pos <= obj.items.length) {
-                        obj.setPosition(pos);
+                        obj.setPosition(pos, force);
                     }
                 });
 

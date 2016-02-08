@@ -1,5 +1,5 @@
 /*!
-  jQuery JumboSlider Plugin v1.0.3
+  jQuery JumboSlider Plugin v1.1.0
   http://jumboslider.martinmetodiev.com
 
   Copyright (c) 2015 Martin Metodiev

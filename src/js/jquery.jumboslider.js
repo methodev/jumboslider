@@ -428,6 +428,59 @@ var plugin = {
                 });
 
                 return this;
+            },
+
+            destroy: function() {
+                this.each(function() {
+                    var obj = this.jumboslider;
+
+                    (function() {
+                        console.log('destroy obj', obj);
+
+                        if (obj.options.arrows) {
+                            obj.removeClass('jumboslider-arrowed');
+                            obj.arrows.remove();
+                        }
+
+                        if (obj.options.pagination) {
+                            obj.removeClass('jumboslider-paginated');
+                            obj.pagination.remove();
+                        }
+
+                        obj.overview.removeAttr('style');
+                        obj.items.removeAttr('style');
+
+                        obj.removeClass('jumboslider-ready force');
+
+                        obj.unbind('keyup');
+                        obj.unbind('blur');
+                    })();
+
+                    // Unbind provided events
+                    for (var event in obj.options) {
+                        obj.unbind(event, obj.options[event]);
+                    }
+
+                    // Delete object from the targets' list
+                    for (var i = 0; i < $.jumboslider.targets.length; i++) {
+                        if (this === $.jumboslider.targets[i][0]) {
+                            $.jumboslider.targets.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    // Delete jumboslider object
+                    delete this.jumboslider;
+                });
+
+                // Delete output properties
+                for (var property in plugin.output) {
+                    if (this.hasOwnProperty[plugin.output[property]]) {
+                        delete this[plugin.output[property]];
+                    }
+                }
+
+                return this;
             }
         }
     };

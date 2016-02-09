@@ -1,18 +1,18 @@
 /*!
-  jQuery JumboSlider Plugin v1.1.2
-  http://jumboslider.martinmetodiev.com
+ jQuery JumboSlider Plugin v1.1.2
+ http://jumboslider.martinmetodiev.com
 
-  Copyright (c) 2015 Martin Metodiev
-  Licensed under the MIT license.
-*/
+ Copyright (c) 2015 Martin Metodiev
+ Licensed under the MIT license.
+ */
 
 
 ;(function($) {
 
-'use strict';
+    'use strict';
 
 // Define all plugin components
-var plugin = {
+    var plugin = {
         // Base plugin data
         base: {
             // Default target selector if no such provided
@@ -65,7 +65,7 @@ var plugin = {
         setup: {
             target: function(params) {
                 var target = params && params.hasOwnProperty('target') ?
-                       params.target : plugin.base.target;
+                    params.target : plugin.base.target;
 
                 if (!target.is('.jumboslider')) { target.addClass('jumboslider'); }
 
@@ -102,7 +102,7 @@ var plugin = {
         methods: {
             init: function(params) {
                 var obj = this;
-                
+
                 // Attach options
                 obj.options = plugin.setup.options(params);
 
@@ -111,17 +111,19 @@ var plugin = {
                 obj.overview = obj.find('.jumboslider-overview');
                 obj.items = obj.find('.jumboslider-item');
 
-                // Set keyboard arrows
-                if (typeof obj.attr('tabindex') === 'undefined') {
-                    obj.attr('tabindex', '1');
-                }
+                // Define current states
+                obj.currentPosition = obj.options.startPosition;
+                obj.currentItem = $(obj.items[obj.currentPosition-1]);
 
                 // Setup controllers
                 obj.setControllers();
 
                 // Set initial width and position
                 obj.setWidth()
-                   .setPosition(obj.options.startPosition, 'force');
+                    .setPosition(obj.options.startPosition, 'force');
+
+                // Focus the object when the cursor enters or clicks its area
+                obj.items.bind('mouseenter click', function() { obj.setKeyboard(); });
 
                 // Bind provided events
                 for (var event in obj.options.events) {
@@ -133,22 +135,33 @@ var plugin = {
                 // Bind window resize event to update jumboslides position & fluid width
                 $(window).bind('resize', function() {
                     obj.setWidth()
-                       .setPosition(obj.currentPosition, 'force');
+                        .setPosition(obj.currentPosition, 'force');
                 });
+
+                obj.overview.bind(
+                    'webkitTransitionEnd ' +
+                    'otransitionend ' +
+                    'oTransitionEnd ' +
+                    'msTransitionEnd ' +
+                    'transitionend',
+
+                    function() {
+                        if (obj.options.keyboard && obj.items.length > 1) {
+                            obj.setKeyboard();
+                        }
+                    }
+                );
 
                 return obj.addClass('jumboslider-ready');
             },
 
             setControllers: function() {
                 var obj = this;
-                
+
                 // Keyboard arrows (if active)
                 if (obj.options.keyboard) {
                     // Set forced focus (if required)
                     if (obj.options.keyboardFocus) { obj.setKeyboard(); }
-
-                    // Focus the object when the cursor enters or clicks its area
-                    obj.bind('mouseenter click', function() { obj.setKeyboard(); });
                 }
 
                 // Arrows (if active)
@@ -169,7 +182,7 @@ var plugin = {
 
                 function getElse(direction) {
                     return obj.options.loop ? direction :
-                                    obj.currentPosition;
+                        obj.currentPosition;
                 }
 
                 switch(direction) {
@@ -190,7 +203,8 @@ var plugin = {
             },
 
             setKeyboard: function() {
-                var obj = this;
+                var obj = this,
+                    item = obj.currentItem ? obj.currentItem : $(obj.items[0]);
 
                 function action(e) {
                     var direction;
@@ -203,13 +217,17 @@ var plugin = {
                     obj.setPosition( obj.calculatePosition(direction) );
                 }
 
-                if (!obj.is('.jumboslider-focused')) {
-                    obj.focus().addClass('jumboslider-focused');
-                    obj.bind('keyup', action);
+                if (!item.is('.jumboslider-focused')) {
+                    item.attr('tabindex', '1')
+                        .focus()
+                        .addClass('jumboslider-focused');
 
-                    obj.bind('blur', function() {
-                        obj.unbind('keyup', action)
-                           .removeClass('jumboslider-focused');
+                    item.bind('keyup', action);
+
+                    item.bind('blur', function() {
+                        item.unbind('keyup', action)
+                            .removeAttr('tabindex')
+                            .removeClass('jumboslider-focused');
                     });
                 }
 
@@ -233,8 +251,10 @@ var plugin = {
                             obj.previousPosition = obj.currentPosition || null;
                             obj.currentPosition = validPos ? pos : obj.previousPosition;
 
-                            left = '-'+$(obj.items[obj.currentPosition-1])
-                                    .position().left+'px';
+                            obj.currentItem = $(obj.items[obj.currentPosition-1]);
+
+                            left = obj.currentItem.position().left;
+                            left = left === 0 ? 0 : '-' + left + 'px';
 
                             return this;
                         },
@@ -247,7 +267,7 @@ var plugin = {
                         },
 
                         transit: obj.transit,
-                        
+
                         controllers: function() {
                             if (obj.options.pagination && obj.items.length > 1) {
                                 obj.pagination.update();
@@ -261,9 +281,9 @@ var plugin = {
                     };
 
                 position.update()
-                        .checkForce()
-                        .transit(obj.overview, left)
-                        .controllers();
+                    .checkForce()
+                    .transit(obj.overview, left)
+                    .controllers();
 
                 if (obj.previousPosition !== obj.currentPosition) {
                     obj.trigger('onSlide', [obj]);
@@ -301,7 +321,7 @@ var plugin = {
 
                             obj.setPosition(newPos);
                         });
-                        
+
                         obj.addClass('jumboslider-arrowed');
 
                         return arrows;
@@ -309,7 +329,7 @@ var plugin = {
 
                     update: function() {
                         var pos = obj.currentPosition;
-                        
+
                         obj.arrows.arrow.removeClass('hidden-arrow');
 
                         if (!obj.options.loop) {
@@ -382,10 +402,7 @@ var plugin = {
 
             transit: function(obj, pos) {
                 if (navigator.appVersion.indexOf('MSIE 9.') !== -1) {
-                    obj.animate({ left: pos }, 500, function() {
-                        // Animation complete.
-                    });
-                    
+                    obj.animate({ left: pos }, 500);
                 }
                 else {
                     obj.css({left: pos});
@@ -397,7 +414,7 @@ var plugin = {
 
         output: {
             extended: true,
-            
+
             slideNext: function() {
                 this.each(function() {
                     var obj = this.jumboslider;
@@ -484,37 +501,37 @@ var plugin = {
     };
 
 // Define plugin as a jQuery function
-$.jumboslider = function(params) {
-    // Setup target
-    var target = plugin.setup.target(params);
+    $.jumboslider = function(params) {
+        // Setup target
+        var target = plugin.setup.target(params);
 
-    // Create a jQuery Object Instance (extended with jumboslider) inside the DOM object
-    target.each(function() {
-        if (!this.jumboslider) {
-            $.extend(this, {
-                jumboslider: $.extend($(this), plugin.methods)
-            });
+        // Create a jQuery Object Instance (extended with jumboslider) inside the DOM object
+        target.each(function() {
+            if (!this.jumboslider) {
+                $.extend(this, {
+                    jumboslider: $.extend($(this), plugin.methods)
+                });
 
-            var jumboslider = this.jumboslider;
+                var jumboslider = this.jumboslider;
 
-            $.jumboslider.targets.push(jumboslider.init(params));
-        }
-    });
+                $.jumboslider.targets.push(jumboslider.init(params));
+            }
+        });
 
-    // Extend target with public methods (if not yet)
-    if (!target.extended) { $.extend(target, plugin.output); }
+        // Extend target with public methods (if not yet)
+        if (!target.extended) { $.extend(target, plugin.output); }
 
-    return target;
-};
+        return target;
+    };
 
 // Define plugin as a method function
-$.fn.jumboslider = function(params) {
-    params = $.extend({}, params, {target: $(this)});
+    $.fn.jumboslider = function(params) {
+        params = $.extend({}, params, {target: $(this)});
 
-    return $.jumboslider(params);
-};
+        return $.jumboslider(params);
+    };
 
 // Create public storage array with all DOM elements that are active targets of the plugin
-$.jumboslider.targets = [];
+    $.jumboslider.targets = [];
 
 }(jQuery));

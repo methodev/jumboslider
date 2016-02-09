@@ -9,9 +9,6 @@
   height: 100%;
   position: relative;
 }
-.jumboslider:focus {
-  outline: none;
-}
 .jumboslider .jumboslider-viewport {
   width: 100%;
   height: 100%;
@@ -46,6 +43,9 @@
 }
 .jumboslider .jumboslider-item:not(:last-of-type) {
   margin-right: 1px;
+}
+.jumboslider .jumboslider-item:focus {
+  outline: none;
 }
 .jumboslider.jumboslider-ready .jumboslider-item {
   opacity: 1;

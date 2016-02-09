@@ -28,8 +28,6 @@
 .jumboslider {
     height: 100%;
     position: relative;
-    
-    &:focus { outline: none; }
 }
 
 
@@ -80,6 +78,8 @@
         opacity: 0;
         
         &:not(:last-of-type) { margin-right: 1px; }
+
+        &:focus { outline: none; }
     }
 
     &.jumboslider-ready .jumboslider-item { opacity: 1; }

@@ -225,7 +225,9 @@
                         case 39: direction = 'next'; break;
                     }
 
-                    obj.setPosition( obj.calculatePosition(direction) );
+                    if (direction === 'prev' || direction === 'next') {
+                        obj.setPosition( obj.calculatePosition(direction) );
+                    }
                 }
 
                 if (!item.is('.jumboslider-focused')) {

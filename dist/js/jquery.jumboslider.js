@@ -134,10 +134,12 @@
                 }
 
                 // Bind window resize event to update jumboslides position & fluid width
-                $(window).bind('resize', function() {
-                    obj.setWidth()
-                        .setPosition(obj.currentPosition, 'force');
-                });
+                if (!window.jumboslider_resize) {
+                    $(window).on('resize', function() {
+                        window.jumboslider_resize = true;
+                        obj.setWidth().setPosition(obj.currentPosition, 'force');
+                    });
+                }
 
                 obj.overview.bind(
                     'webkitTransitionEnd ' +
@@ -434,7 +436,7 @@
                 if (target.is('.jumboslider-overview')) {
                     obj.sliding = true;
 
-                    if (force) {
+                    if (force || obj.currentPosition === obj.previousPosition) {
                         obj.sliding = false;
                     }
                 }
@@ -480,7 +482,8 @@
 
             destroy: function() {
                 this.each(function() {
-                    var obj = this.jumboslider;
+                    var obj = this.jumboslider,
+                        item = obj.currentItem;
 
                     (function() {
                         if (obj.options.arrows) {
@@ -498,8 +501,18 @@
 
                         obj.removeClass('jumboslider-ready force');
 
-                        obj.unbind('keyup');
-                        obj.unbind('blur');
+                        item.unbind('keyup');
+                        item.unbind('blur');
+
+                        obj.items.unbind('mouseenter click');
+
+                        obj.overview.unbind(
+                            'webkitTransitionEnd ' +
+                            'otransitionend ' +
+                            'oTransitionEnd ' +
+                            'msTransitionEnd ' +
+                            'transitionend'
+                        );
                     })();
 
                     // Unbind provided events

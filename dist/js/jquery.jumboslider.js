@@ -111,7 +111,8 @@
                 obj.overview = obj.find('.jumboslider-overview');
                 obj.items = obj.find('.jumboslider-item');
 
-                // Define current states
+                // Define states
+                obj.sliding = false;
                 obj.currentPosition = obj.options.startPosition;
                 obj.currentItem = $(obj.items[obj.currentPosition-1]);
 
@@ -146,13 +147,23 @@
                     'transitionend',
 
                     function() {
-                        if (obj.options.keyboard && obj.items.length > 1) {
-                            obj.setKeyboard();
-                        }
+                        obj.onSlideEnd();
                     }
                 );
 
                 return obj.addClass('jumboslider-ready');
+            },
+
+            onSlideEnd: function() {
+                var obj = this;
+
+                obj.sliding = false;
+
+                if (obj.options.keyboard && obj.items.length > 1) {
+                    obj.setKeyboard();
+                }
+
+                return obj;
             },
 
             setControllers: function() {
@@ -266,7 +277,11 @@
                             return this;
                         },
 
-                        transit: obj.transit,
+                        transit: function(target, pos, force) {
+                            obj.transit(target, pos, force);
+
+                            return this;
+                        },
 
                         controllers: function() {
                             if (obj.options.pagination && obj.items.length > 1) {
@@ -280,13 +295,15 @@
                         }
                     };
 
-                position.update()
-                    .checkForce()
-                    .transit(obj.overview, left)
-                    .controllers();
+                if (!obj.sliding) {
+                    position.update()
+                        .checkForce()
+                        .transit(obj.overview, left, force)
+                        .controllers();
 
-                if (obj.previousPosition !== obj.currentPosition) {
-                    obj.trigger('onSlide', [obj]);
+                    if (obj.previousPosition !== obj.currentPosition) {
+                        obj.trigger('onSlide', [obj]);
+                    }
                 }
 
                 return obj;
@@ -400,15 +417,27 @@
                 return pagination;
             },
 
-            transit: function(obj, pos) {
+            transit: function(target, pos, force) {
+                var obj = this;
+
                 if (navigator.appVersion.indexOf('MSIE 9.') !== -1) {
-                    obj.animate({ left: pos }, 500);
+                    target.animate({ left: pos }, 500, function() {
+                        target.onSlideEnd();
+                    });
                 }
                 else {
-                    obj.css({left: pos});
+                    target.css({left: pos});
                 }
 
-                return this;
+                if (target.is('.jumboslider-overview')) {
+                    obj.sliding = true;
+
+                    if (force) {
+                        obj.sliding = false;
+                    }
+                }
+
+                return obj;
             }
         },
 

@@ -1,0 +1,114 @@
+// =========================| Demo styles |========================= //
+
+
+
+//--------------------------| Compass
+
+@import '../../../node_modules/compass-mixins/lib/compass';
+
+
+//--------------------------| Variables
+
+$col-white: #fff;
+$col-blue: #36c;
+$col-green: #50a97e;
+$col-orange: #f7aa42;
+$col-brown: #bc6161;
+$col-gray-light: #ccc;
+
+
+
+//====================> 1. Base
+
+.demo-holder {
+
+  .content {
+    img {
+      display: block;
+    }
+
+    .jumboslider-paginated {
+      margin-bottom: 80px;
+    }
+
+    .jumboslider:not(.jumboslider-paginated) {
+      margin-bottom: 50px;
+    }
+
+    .demo-jumbotron {
+      height: 200px;
+
+      .jumboslider-viewport {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .jumbotron {
+        display: table;
+        width: 100%;
+        height: 200px;
+        text-align: center;
+        background: $col-gray-light;
+
+        p {
+          display: table-cell;
+          padding: 2% 12%;
+          font-size: 200%;
+          font-weight: bold;
+          line-height: 1.2;
+          color: $col-white;
+          vertical-align: middle;
+        }
+
+        &:nth-child(1) { background-color: $col-blue; }
+        &:nth-child(2) { background-color: $col-green; }
+        &:nth-child(3) { background-color: $col-orange; }
+        &:nth-child(4) { background-color: $col-brown; }
+      }
+    }
+
+    .demo-iframe {
+      .jumboslider-item {
+        position: relative;
+        padding-top: 20.86%;
+
+        .holder {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+
+          iframe {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .demo-loop {
+      .controllers {
+        margin-bottom: 10px;
+
+        .prev { float: left;  }
+        .next { float: right; }
+
+        .textfield {
+          width: 50px;
+          text-align: right;
+        }
+
+        .custom-slide-btn {
+          position: relative;
+          top: -2px;
+        }
+      }
+
+      .custom-controller {
+        text-align: center;
+      }
+    }
+  }
+
+}

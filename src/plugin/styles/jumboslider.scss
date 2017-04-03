@@ -1,0 +1,249 @@
+// =========================| Demo styles |========================= //
+
+
+
+//--------------------------| Compass
+
+@import '../../../node_modules/compass-mixins/lib/compass';
+
+
+//--------------------------| Variables
+
+$col-white: #fff;
+$col-gray-light: #e5e5e5;
+$col-gray: #999;
+$col-gray-dark: #333;
+$col-blue: #36c;
+
+
+//--------------------------| Mixins
+
+@mixin no-transition() {
+  @include transition(none);
+}
+
+
+
+//====================> 1. Base
+
+//------------------> 1.1. Parent
+
+.jumboslider {
+  position: relative;
+  height: 100%;
+}
+
+
+//------------------> 1.2. Viewport
+
+.jumboslider-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+//------------------> 1.3. Overview
+
+.jumboslider-overview {
+  @include transition(left .5s ease-in-out);
+
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  min-width: 100%;
+
+  .force & {
+    @include no-transition();
+  }
+}
+
+
+
+//====================> 2. Base
+
+.jumboslider-item {
+  float: left;
+  height: 100%;
+  opacity: 0;
+
+  &:not(:last-of-type) {
+    margin-right: 1px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .jumboslider-ready & {
+    opacity: 1;
+  }
+}
+
+
+
+//====================> 3. Arrows
+
+.jumboslider-arrows {
+  opacity: 0;
+
+  a {
+    @include transition(background-color .2s ease-in-out, opacity .2s ease-in-out);
+
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    display: block;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    background-color: transparent;
+    opacity: 0;
+
+    &:hover {
+      background-color: rgba($col-white, .5);
+    }
+
+    &.jumboslider-prev-arrow { left:  0; }
+    &.jumboslider-next-arrow { right: 0; }
+
+    &.jumboslider-prev-arrow::after { background-image: url(data-uri('src/plugin/images/arrow-left.svg')); }
+    &.jumboslider-next-arrow::after { background-image: url(data-uri('src/plugin/images/arrow-right.svg')); }
+
+    &::after {
+      @include transition(opacity .2s ease-in-out);
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100% ;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80% auto;
+      content: '';
+      opacity: .8;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &.hidden-arrow {
+      display: none;
+    }
+  }
+
+  .jumboslider-arrowed:hover & {
+    a {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+//====================> 4. Pagination
+
+.jumboslider-pagination {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  font-size: 0;
+  text-align: center;
+  opacity: 0;
+
+  .holder {
+    position: relative;
+    display: inline-block;
+    height: 14px;
+    margin-top: 20px;
+    margin-left: 1px;
+    overflow: hidden;
+    background-color: $col-gray-light;
+  }
+
+  a {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    width: 22px;
+    height: 16px;
+    margin: -1px -1px 0;
+    overflow: hidden;
+    text-decoration: none;
+
+    &:hover:not(.current)::after  { background-color: rgba($col-blue, 1); }
+    &:active:not(.current)::after { background-color: rgba($col-blue, .75); }
+
+    &::after {
+      @include transition(background-color .5s ease-in-out);
+
+      position: absolute;
+      top: 0;
+      left: 1px;
+      z-index: 1;
+      width: 20px;
+      height: 100%;
+      content: '';
+    }
+
+    .dot {
+      position: relative;
+      z-index: 2;
+      display: block;
+      height: 100%;
+
+      background: url(data-uri('src/plugin/images/dot-mask.svg')) no-repeat center;
+    }
+
+    &.current {
+      cursor: default;
+    }
+  }
+
+  .jumboslider-pagination-current {
+    @include transition(left .5s ease-in-out);
+
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+    width: 22px;
+    height: 16px;
+    text-align: center;
+    cursor: default;
+
+    &::after {
+      $size: 16px;
+
+      @include border-radius(50%);
+
+      display: inline-block;
+      width: $size;
+      height: $size;
+      overflow: hidden;
+      background-color: $col-gray;
+      content: '';
+    }
+  }
+
+  .force & {
+    .jumboslider-pagination-current {
+      @include no-transition();
+    }
+  }
+
+  @at-root {
+    .jumboslider {
+      &.jumboslider-paginated {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}

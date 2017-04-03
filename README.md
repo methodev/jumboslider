@@ -1,6 +1,8 @@
-# jQuery JumboSlider Plugin v1.1.6
+# jQuery JumboSlider Plugin
 
 Yet another responsive slider for any kind of content.
+
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/) [![Travis](https://img.shields.io/travis/martinmethod/jumboslider.svg)](https://travis-ci.org/martinmethod/jumboslider) [![David](https://img.shields.io/david/dev/martinmethod/jumboslider.svg)](https://david-dm.org/martinmethod/jumboslider?type=dev) [![GitHub release](https://img.shields.io/github/release/martinmethod/jumboslider.svg)](https://github.com/martinmethod/jumboslider/releases/latest)
 
 ## Description
 
@@ -14,7 +16,7 @@ JumboSlider is a light and responsive jQuery plugin that provides a simple way t
 
 You can [download the plugin as an archive][zip].
 
-[zip]: https://github.com/martinmethod/jumboslider/zipball/master
+[zip]: https://github.com/martinmethod/jumboslider/zipball/prod
 
 Or you can grab it by using **npm**:
 
@@ -85,7 +87,7 @@ Of course, you can also provide specific target/s with a custom selector by doin
 
 ```javascript
 $.jumboslider({
-    target: $('selector') 
+    target: $('selector')
 });
 ```
 
@@ -123,7 +125,7 @@ $.jumboslider({
 });
 ```
 
-Type: **number**  
+Type: **number**
 Default value: **1**
 
 #### arrows
@@ -136,7 +138,7 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**  
+Type: **boolean**
 Default value: **true**
 
 #### pagination
@@ -149,7 +151,7 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**  
+Type: **boolean**
 Default value: **true**
 
 #### loop
@@ -162,7 +164,7 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**  
+Type: **boolean**
 Default value: **false**
 
 #### keyboard
@@ -175,7 +177,7 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**  
+Type: **boolean**
 Default value: **true**
 
 #### keyboardFocus
@@ -190,7 +192,7 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**  
+Type: **boolean**
 Default value: **false**
 
 ### Events
@@ -301,6 +303,6 @@ slider.slideTo(5); // will slide to the fifth item
 
 ## License
 
-Copyright © 2015 Martin Metodiev. Licensed under the MIT license. [See here for more details.][licence]
+Copyright © 2017 Martin Metodiev. Licensed under the MIT license. [See here for more details.][licence]
 
-[licence]: https://raw.github.com/martinmethod/jumboslider/master/LICENSE-MIT
+[licence]: https://raw.github.com/martinmethod/jumboslider/prod/LICENSE-MIT

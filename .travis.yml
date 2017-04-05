@@ -15,7 +15,6 @@ deploy:
     secure: NijR5FG1do5n52owxn1PNbk7BDzpnCP4KMGOWezDwIih6YhKJu6HsBBLRq/YH/35fDGeZq/oamA5+CRjBjYvjOaJjEcoVJSZBMz60HGmpvgOIFbVrZDSd9TPlHpLq2fHNrTgCupHizT72jhMhgiGCgdAfqo25B5AAr26Jyb9LeCIWcjaRaZQD0eT2/+gKVNqPmnCQDkWtd/ocfBkuUuoyoBDLHk8JQxN/77vMDlTiB1J236kyyOCke3oZ8c155FlIKBy3jz2Zgq5cL6S7SFf6/iRQoMTBovlOL1ct2Bg5uK+kmux/ug8VAvP2CQTpg7dio47Zzvcce/RG+v5bJsEM8WyR3EnbQLowS05JlFOULzFN27kAb16yKZq0KX8mIzGPcPlfqkz3A/mYe79kw41Fol65q+pJJczwnVeNqW4CVU950FA7liKKnkwapOa3OBMH1NV/fnNt69KNxGoC8CMcJHmqmvFiKBj+b/SVcX5wcAYanGVPVTTi803kOqD55wAk+PXZmsowD8PGTT8DyhM5NIPgTHHHnuFkIUP56XuQg2YJrgQtl01no0d4E19Jy0VOnKUC/lgOvkGtTKQpQTAUREpJzi1aOso9OoIdCDhZ5hDAV9BTsYzX4T085e79doGsXSteYobIQqaGPgTWXl+kCh6VABUJbva8WxHY0RJiBM=
   on:
     tags: true
-    all_branches: true
 - provider: pages
   skip_cleanup: true
   github_token:
@@ -28,4 +27,3 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-

@@ -1,19 +1,31 @@
 language: node_js
 node_js:
 - node
-script: bash ./deploy.sh
-env:
-  global:
-  - ENCRYPTION_LABEL: 02f2a91bcebf
-  - COMMIT_AUTHOR_EMAIL: metodiev.martin@gmail.com
+script:
+- printf 'configs/\nsrc/\n.npmignore\n.travis.yml\nCHANGELOG.md\nGruntfile.js\nbower.json\nLICENSE-MIT\npackage.json\nnode_modules/\n.gitignore\ndeployed*' > .gitignore
+- printf '.npmignore\n.travis.yml\nCNAME' > .npmignore
+- printf 'jumboslider.martinmetodiev.com' > CNAME
 branches:
   only:
-  - "/v\\d+\\.\\d+\\.\\d+/"
+  - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 deploy:
-  provider: npm
+- provider: npm
   email: metodiev.martin@gmail.com
   api_key: # …7de1678f
     secure: NijR5FG1do5n52owxn1PNbk7BDzpnCP4KMGOWezDwIih6YhKJu6HsBBLRq/YH/35fDGeZq/oamA5+CRjBjYvjOaJjEcoVJSZBMz60HGmpvgOIFbVrZDSd9TPlHpLq2fHNrTgCupHizT72jhMhgiGCgdAfqo25B5AAr26Jyb9LeCIWcjaRaZQD0eT2/+gKVNqPmnCQDkWtd/ocfBkuUuoyoBDLHk8JQxN/77vMDlTiB1J236kyyOCke3oZ8c155FlIKBy3jz2Zgq5cL6S7SFf6/iRQoMTBovlOL1ct2Bg5uK+kmux/ug8VAvP2CQTpg7dio47Zzvcce/RG+v5bJsEM8WyR3EnbQLowS05JlFOULzFN27kAb16yKZq0KX8mIzGPcPlfqkz3A/mYe79kw41Fol65q+pJJczwnVeNqW4CVU950FA7liKKnkwapOa3OBMH1NV/fnNt69KNxGoC8CMcJHmqmvFiKBj+b/SVcX5wcAYanGVPVTTi803kOqD55wAk+PXZmsowD8PGTT8DyhM5NIPgTHHHnuFkIUP56XuQg2YJrgQtl01no0d4E19Jy0VOnKUC/lgOvkGtTKQpQTAUREpJzi1aOso9OoIdCDhZ5hDAV9BTsYzX4T085e79doGsXSteYobIQqaGPgTWXl+kCh6VABUJbva8WxHY0RJiBM=
   on:
     tags: true
     all_branches: true
+- provider: pages
+  skip_cleanup: true
+  github_token:
+    secure: ZCzQnsp+nMP7hRS9kz74GVKX4ryM+8iydZ71Ct1DOuTQKn0v1mUlW1TfpN9DsvDyJ09dxVgm7VC42Y7dys8Ws65qbCoZ1n8Ug9KKhjXCM3nxflsttA2D+k4OcUkIvgj7lShONi0lB7IyBk1A9FYXQaHnw+CKwAtQXNVq2fX2BoHOJwv02d9dlSq1YOJHm79HhHNmgIOW3gkXB8oxFwXoYVHf3queYnlTAzCCSXjRWn1a9yJnF+9m9y7mTvc05sUXE3ZZSpoFS53UmjXBWUCbjOje1855kpG4eQcKBu+nyP7IuqhpOmFKFcUkDaRM0pAMWoGuLgZYnYNWIZ+DqPu0/tdPFddCSD7LULOZvN8qFs8lSKMKMPz/VgIbGT0ku4yoyqHZxl5FAZdngX8JfBd9+4oJqaGW0YP7rLSBh6+K5OcIXWLIEUWeWDTNw7p6ZZNSVcXtHqwALsfc7cFa6WyTGE7D0bPyWLztoyYRQOUu3io+uIBdb7FS7KETlxgHbexj3l2FM+n7VPgO/jq2sA2dapI3As5DxhNH6nrNs7ZU+94CQ5Jp/sfUy9klywsGPh/5S2Wmnv73EVJ3nCGFv/CddNjd5hSIE1gZwzt1+ZJFQvB0bbTb2qoeqtuyPCfz+LnDd71WfBvHtLFapk/BRCUzR6l+OXkm4q7WtGgALladQ78=
+  on:
+    tags: true
+- provider: releases
+  api_key:
+    secure: VKJuZMX1d7PkMg3S4LySQeBj7sWrFk09It7IWcekH63AsmpmX5eqdMUppjVwOmSwm/+JYj0DbfLLM1Z2MkwOnX9bJ4KhiDbjAQ3OndI48ihbCHpqwtuRXts+cgGvT7OdbjzQeSKqRRD15cR8cSp9EZXbiHIQzQ9Yj6B3IRyAQB4zkauZIFOfeRFTVyjVa/olceeveRY6SESJKdskz8Nx/z3D4SLSMh+PbMRzsEQ4mMbwlkW7bUjAogzYRhILcUpDLrjjInCyKvCbCZVDUrrFQSZqcFxeaUZJN1JBElJc/LMHPSCXIigoWQAh/UagNnN1QgXMxfAlTwmOf4mX2bNRxUh0iYx1DY+1ZDFnm46picwvIOAQQOvlHrBZFZC0pkH8Hnv5QPf9P2RQ3nmC9LkIBlp9LwL+1CupnGU04dnfNck7XkupbM7L4VRByFhpSJFNgLhDuRUurRV/2wCz2KNpR5PN5kR7cnmh50YV0jEwooclKCFHI+EIgm17/2KhxlzJhloS76lq9oN+T7Rga4AhA81uv8RWBTiYhoA3Qgo3Z4ZjyF5Nprjs03bTpfMtvsxFHJBASIQhXpbevNYITWqbyDvUREoJMjmptP8OggCgOKg6XyiHgyYjwAQ6pfJVvmZ6gjI6HzrGvZfKbEzcp5mF8iyCeJKTnBLq3bvyOyIEu7c=
+  skip_cleanup: true
+  on:
+    tags: true
+

@@ -1,3 +1,14 @@
+<a name="1.3.1"></a>
+## 1.3.1 (2017-04-11)
+
+
+### Features
+
+* **Arrows:** Arrows are now white ([f814a5b](https://github.com/martinmethod/jumboslider/commit/f814a5b))
+* **Build:** External markup support ([ed2b370](https://github.com/martinmethod/jumboslider/commit/ed2b370))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2017-04-05)
 

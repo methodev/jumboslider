@@ -1,9 +1,12 @@
 module.exports = function(grunt) {
   var path = require('path'),
-      assets = grunt.file.exists('../assets.json') ? grunt.file.readJSON('../assets.json').path : 'node_modules/my-jquery-plugins-assets/',
+      assets = grunt.file.exists('../assets.json') ?
+               grunt.file.readJSON('../assets.json').path :
+               'node_modules/my-jquery-plugins-assets/',
       config = grunt.file.readJSON(assets + 'configs/config.json'),
       pkg = grunt.file.readJSON('package.json'),
       settings = grunt.file.readJSON('configs/settings.json'),
+      banner = require(assets + 'configs/banner'),
       env = grunt.option('target') || 'dev',
       prod = env === 'prod';
 
@@ -16,16 +19,10 @@ module.exports = function(grunt) {
     env: env,
 
     envPath: !prod ?
-      'assets/page/' :
-      'http://assets.' + config.domain + '/',
+             'assets/page/' :
+             'http://assets.' + config.domain + '/',
 
-    banner: '/*! \n' +
-            ' <%= pkg.title %> v<%= pkg.version %>\n' +
-            ' <%= pkg.homepage%>\n' +
-            '\n' +
-            ' Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-            ' Licensed under the <%= pkg.license %> license.\n' +
-            '*/\n',
+    banner: banner,
 
     domain: pkg.name.toLowerCase() + '.' + config.domain
   };
@@ -41,5 +38,4 @@ module.exports = function(grunt) {
     grunt.task.run(['concurrent:build']);
     grunt.task.run(['concurrent:' + env]);
   });
-
 };

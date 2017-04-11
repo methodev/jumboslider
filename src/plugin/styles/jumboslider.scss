@@ -14,6 +14,8 @@ $col-gray-light: #e5e5e5;
 $col-gray: #999;
 $col-gray-dark: #333;
 $col-blue: #36c;
+$col-green: #390;
+$col-red: #c00;
 
 
 //--------------------------| Mixins
@@ -105,15 +107,19 @@ $col-blue: #36c;
     background-color: transparent;
     opacity: 0;
 
+    svg {
+      width: 100%;
+      height: 100%;
+
+      fill: $col-white;
+    }
+
     &:hover {
       background-color: rgba($col-white, .5);
     }
 
     &.jumboslider-prev-arrow { left:  0; }
     &.jumboslider-next-arrow { right: 0; }
-
-    &.jumboslider-prev-arrow::after { background-image: url(data-uri('src/plugin/images/arrow-left.svg')); }
-    &.jumboslider-next-arrow::after { background-image: url(data-uri('src/plugin/images/arrow-right.svg')); }
 
     &::after {
       @include transition(opacity .2s ease-in-out);
@@ -124,9 +130,6 @@ $col-blue: #36c;
       display: block;
       width: 100% ;
       height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 80% auto;
       content: '';
       opacity: .8;
     }

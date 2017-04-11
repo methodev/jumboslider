@@ -6,9 +6,6 @@
   var plugin = {
     // Base plugin data
     base: {
-      // Default target selector if no such provided
-      target: $('.jumboslider'),
-
       // List of all supported options with their default values
       options: {
         startPosition: 1,
@@ -45,7 +42,7 @@
     setup: {
       target: function(params) {
         var target = params && params.hasOwnProperty('target') ?
-          params.target : plugin.base.target;
+          params.target : $('.jumboslider');
 
         if (!target.is('.jumboslider')) { target.addClass('jumboslider'); }
 

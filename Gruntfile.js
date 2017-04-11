@@ -1,19 +1,23 @@
 module.exports = function(grunt) {
   var path = require('path'),
+      assets = grunt.file.exists('../assets.json') ? grunt.file.readJSON('../assets.json').path : 'node_modules/my-jquery-plugins-assets/',
+      config = grunt.file.readJSON(assets + 'configs/config.json'),
       pkg = grunt.file.readJSON('package.json'),
       settings = grunt.file.readJSON('configs/settings.json'),
       env = grunt.option('target') || 'dev',
       prod = env === 'prod';
 
   grunt.pluginData = {
+    assets: assets,
     pkg: pkg,
+    config: config,
     settings: settings,
     prod: prod,
     env: env,
 
     envPath: !prod ?
       'assets/page/' :
-      'http://assets.martinmetodiev.com/',
+      'http://assets.' + config.domain + '/',
 
     banner: '/*! \n' +
             ' <%= pkg.title %> v<%= pkg.version %>\n' +
@@ -23,7 +27,7 @@ module.exports = function(grunt) {
             ' Licensed under the <%= pkg.license %> license.\n' +
             '*/\n',
 
-    domain: pkg.name.toLowerCase() + '.martinmetodiev.com'
+    domain: pkg.name.toLowerCase() + '.' + config.domain
   };
 
   require('time-grunt')(grunt);

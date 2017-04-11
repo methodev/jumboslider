@@ -1,5 +1,5 @@
 /*! 
- jQuery JumboSlider Plugin v1.3.0
+ jQuery JumboSlider Plugin v1.3.1
  http://jumboslider.martinmetodiev.com
 
  Copyright (c) 2017 Martin Metodiev
@@ -14,9 +14,6 @@
   var plugin = {
     // Base plugin data
     base: {
-      // Default target selector if no such provided
-      target: $('.jumboslider'),
-
       // List of all supported options with their default values
       options: {
         startPosition: 1,
@@ -37,12 +34,22 @@
     ],
 
     dom: {
-      arrows: $('\
-                <div class="jumboslider-arrows">\
-                    <a href="javascript:;" class="jumboslider-prev-arrow"></a>\
-                    <a href="javascript:;" class="jumboslider-next-arrow"></a>\
-                </div>\
-            '),
+      arrows: $(
+        '<div class="jumboslider-arrows">' +
+          '<a href="javascript:;" class="jumboslider-prev-arrow">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">' +
+              '<polygon points="13 2.93 11.56 1.5 5.44 7.57 5.44 ' +
+                ' 7.57 4 9 11.56 16.5 13 15.07 6.88 9 13 2.93"/>' +
+            '</svg>' +
+          '</a>' +
+          '<a href="javascript:;" class="jumboslider-next-arrow">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">' +
+              '<polygon points="12.56 7.57 12.56 7.57 6.44 1.5 5 2.93 ' +
+                ' 11.12 9 5 15.07 6.44 16.5 14 9 12.56 7.57"/>' +
+            '</svg>' +
+          '</a>' +
+        '</div>'
+      ),
       pagination: {
         block: $('<div class="jumboslider-pagination"><div class="holder"></div>'),
         dot: $('<a href="javascript:;"><span class="dot"></span></a>'),
@@ -53,7 +60,7 @@
     setup: {
       target: function(params) {
         var target = params && params.hasOwnProperty('target') ?
-          params.target : plugin.base.target;
+          params.target : $('.jumboslider');
 
         if (!target.is('.jumboslider')) { target.addClass('jumboslider'); }
 

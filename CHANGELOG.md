@@ -1,3 +1,18 @@
+<a name="1.3.2"></a>
+## 1.3.2 (2017-04-11)
+
+
+### Bug Fixes
+
+* **githubUsername:** Broken object ([50d06fa](https://github.com/martinmethod/jumboslider/commit/50d06fa))
+
+
+### Features
+
+* **Banner:** External text configuration ([65588d4](https://github.com/martinmethod/jumboslider/commit/65588d4))
+
+
+
 <a name="1.3.1"></a>
 ## 1.3.1 (2017-04-11)
 

@@ -2,7 +2,7 @@ var grunt = require('grunt');
 
 module.exports = {
   options: {
-    pretty: true,
+    pretty: !grunt.pluginData.prod,
     data: grunt.pluginData
   },
 

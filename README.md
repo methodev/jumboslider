@@ -125,8 +125,8 @@ $.jumboslider({
 });
 ```
 
-Type: **number**
-Default value: **1**
+Type: **number**  
+Default value: **1**  
 
 #### arrows
 
@@ -138,8 +138,8 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **true**
+Type: **boolean**  
+Default value: **true**  
 
 #### pagination
 
@@ -151,8 +151,21 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **true**
+Type: **boolean**  
+Default value: **true**  
+
+#### transition
+
+Defines the speed of the transition between slides (in milliseconds).
+
+```javascript
+$.jumboslider({
+    transition: 200
+});
+```
+
+Type: **number**  
+Default value: **500**  
 
 #### loop
 
@@ -164,36 +177,21 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **false**
+Type: **boolean**  
+Default value: **false**  
 
-#### keyboard
+#### autoplay
 
-Defines whether or not the keyboard arrows should be working controllers (if on computer).
-
-```javascript
-$.jumboslider({
-    keyboard: true
-});
-```
-
-Type: **boolean**
-Default value: **true**
-
-#### keyboardFocus
-
-Defines whether or not the JumboSlider target should be immediately focused, so it can have working keyboard arrows (if on computer).
-
-*Please note that this property requires the "keyboard" option to be set to "true" and also it would be useful if you only have one slider per page.*
+Defines whether or not the JumboSlider should runs automatically by providing a lifetime duration for the slides (in milliseconds). The default duration is `0` which means the autoplay is off.
 
 ```javascript
 $.jumboslider({
-    keyboardFocus: false
+    autoplay: 3000
 });
 ```
 
-Type: **boolean**
-Default value: **false**
+Type: **number**  
+Default value: **0**  
 
 ### Events
 

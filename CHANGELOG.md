@@ -1,3 +1,19 @@
+<a name="1.4.0"></a>
+# 1.4.0 (2017-05-31)
+
+
+### Bug Fixes
+
+* **Overview width:** Wrong calculations ([aacd891](https://github.com/martinmethod/jumboslider/commit/aacd891))
+
+
+### Features
+
+* **Autoplay:** Ability to slide automatically ([b44bc46](https://github.com/martinmethod/jumboslider/commit/b44bc46))
+* **Transition:** Ability to define the transition speed ([0d121f0](https://github.com/martinmethod/jumboslider/commit/0d121f0))
+
+
+
 <a name="1.3.2"></a>
 ## 1.3.2 (2017-04-11)
 

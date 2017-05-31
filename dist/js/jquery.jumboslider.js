@@ -1,5 +1,5 @@
 /*! 
- jQuery JumboSlider Plugin v1.3.2
+ jQuery JumboSlider Plugin v1.4.0
  http://jumboslider.martinmetodiev.com
 
  Copyright (c) 2017 Martin Metodiev
@@ -19,11 +19,9 @@
         startPosition: 1,
         arrows: true,
         pagination: true,
+        transition: 500,
         loop: false,
-        keyboard: true,
-        keyboardFocus: false // requires "keyboard" property to be true
-        // auto: false,
-        // autoDuration: 3000
+        autoplay: 0
       }
     },
 
@@ -98,6 +96,8 @@
       init: function(params) {
         var obj = this;
 
+        obj.initializing = true;
+
         // Attach options
         obj.options = plugin.setup.options(params);
 
@@ -115,17 +115,23 @@
         obj.setControllers();
 
         // Set initial width and position
-        obj.setWidth()
-          .setPosition(obj.options.startPosition, 'force');
 
-        // Focus the object when the cursor enters or clicks its area
-        obj.items.bind('mouseenter click', function() { obj.setKeyboard(); });
+        setTimeout(function() {
+          obj.setWidth()
+            .setPosition(obj.options.startPosition, obj.initializing);
+        }, 10);
 
         // Bind provided events
         for (var event in obj.options.events) {
           if (obj.options.events.hasOwnProperty(event)) {
             obj.bind(event, obj.options.events[event]);
           }
+        }
+
+        // Auto play (if turned on)
+        if (obj.options.autoplay > 0) {
+          obj.options.loop = true;
+          obj.autoplay();
         }
 
         // Bind window resize event to update jumboslides position & fluid width
@@ -136,18 +142,6 @@
           });
         }
 
-        obj.overview.bind(
-          'webkitTransitionEnd ' +
-          'otransitionend ' +
-          'oTransitionEnd ' +
-          'msTransitionEnd ' +
-          'transitionend',
-
-          function() {
-            obj.onSlideEnd();
-          }
-        );
-
         return obj.addClass('jumboslider-ready');
       },
 
@@ -156,8 +150,9 @@
 
         obj.sliding = false;
 
-        if (obj.options.keyboard && obj.items.length > 1) {
-          obj.setKeyboard();
+        if (obj.options.autoplay > 0) {
+          clearInterval(obj.interval);
+          obj.autoplay();
         }
 
         return obj;
@@ -166,11 +161,7 @@
       setControllers: function() {
         var obj = this;
 
-        // Keyboard arrows (if active)
-        if (obj.options.keyboard) {
-          // Set forced focus (if required)
-          if (obj.options.keyboardFocus) { obj.setKeyboard(); }
-        }
+        obj.setKeyboard();
 
         // Arrows (if active)
         if (obj.options.arrows && obj.items.length > 1) {
@@ -211,8 +202,7 @@
       },
 
       setKeyboard: function() {
-        var obj = this,
-          item = obj.currentItem ? obj.currentItem : $(obj.items[0]);
+        var obj = this;
 
         function action(e) {
           var direction;
@@ -227,25 +217,28 @@
           }
         }
 
-        if (!item.is('.jumboslider-focused')) {
-          item.attr('tabindex', '1')
-            .focus()
-            .addClass('jumboslider-focused');
+        obj.bind('click', function() {
+          if (!obj.is('.jumboslider-focused')) {
+            obj.attr('tabindex', '1')
+              .focus()
+              .addClass('jumboslider-focused');
 
-          item.bind('keyup', action);
+            obj.bind('keyup', action);
 
-          item.bind('blur', function() {
-            item.unbind('keyup', action)
-              .removeAttr('tabindex')
-              .removeClass('jumboslider-focused');
-          });
-        }
+            obj.bind('blur', function () {
+              obj.unbind('keyup', action)
+                .removeAttr('tabindex')
+                .removeClass('jumboslider-focused');
+            });
+          }
+        });
 
         return obj;
       },
 
       setWidth: function() {
-        this.overview.width(((this.items.length + 1) * this.width()) - 1);
+        this.viewport.width(this.width());
+        this.overview.width((this.items.length * this.width()) + this.items.length - 1);
         this.items.width(this.width());
 
         return this;
@@ -269,13 +262,6 @@
               return this;
             },
 
-            checkForce: function() {
-              if (force) { obj.addClass('force'); }
-              else { obj.removeClass('force'); }
-
-              return this;
-            },
-
             transit: function(target, pos, force) {
               obj.transit(target, pos, force);
 
@@ -284,7 +270,7 @@
 
             controllers: function() {
               if (obj.options.pagination && obj.items.length > 1) {
-                obj.pagination.update();
+                obj.pagination.update(force);
               }
               if (obj.options.arrows && obj.items.length > 1) {
                 obj.arrows.update();
@@ -296,7 +282,6 @@
 
         if (!obj.sliding) {
           position.update()
-            .checkForce()
             .transit(obj.overview, left, force)
             .controllers();
 
@@ -371,7 +356,7 @@
         $.extend(pagination, {
           init: function() {
             var pagination = this,
-              current = plugin.dom.pagination.current.clone();
+                current = plugin.dom.pagination.current.clone();
 
             for (var i = 0; i < obj.items.length; i++) {
               var dot = plugin.dom.pagination.dot.clone();
@@ -384,7 +369,7 @@
             pagination.current = current;
 
             pagination.appendTo(obj);
-            pagination.update();
+
             pagination.css({opacity: 1});
 
             pagination.dots.bind('click', function(/*e*/) {
@@ -402,12 +387,12 @@
             return pagination;
           },
 
-          update: function() {
+          update: function(force) {
             obj.pagination.dots.removeClass('current');
             obj.currentPosition = obj.currentPosition || 1;
             var currentDot = $(obj.pagination.dots[obj.currentPosition - 1]);
 
-            obj.transit(pagination.current, currentDot.position().left - 1);
+            obj.transit(pagination.current, currentDot.position().left - 1, force);
             currentDot.addClass('current');
             return this;
           }
@@ -417,24 +402,28 @@
       },
 
       transit: function(target, pos, force) {
-        var obj = this;
+        var obj = this,
+            duration = force ? 0 : obj.options.transition;
 
-        if (navigator.appVersion.indexOf('MSIE 9.') !== -1) {
-          target.animate({ left: pos }, 500, function() {
-            target.onSlideEnd();
-          });
-        }
-        else {
-          target.css({left: pos});
-        }
+        target.animate({ left: pos }, duration, function() {
+          obj.onSlideEnd();
+        });
 
         if (target.is('.jumboslider-overview')) {
-          obj.sliding = true;
-
-          if (force || obj.currentPosition === obj.previousPosition) {
-            obj.sliding = false;
-          }
+          obj.sliding = !(force || obj.currentPosition === obj.previousPosition);
         }
+
+        return obj;
+      },
+
+      autoplay: function() {
+        var obj = this;
+
+        obj.interval = setInterval(function() {
+          var newPos = obj.calculatePosition('next');
+
+          obj.setPosition(newPos);
+        }, obj.options.autoplay);
 
         return obj;
       }
@@ -499,15 +488,7 @@
             item.unbind('keyup');
             item.unbind('blur');
 
-            obj.items.unbind('mouseenter click');
-
-            obj.overview.unbind(
-              'webkitTransitionEnd ' +
-              'otransitionend ' +
-              'oTransitionEnd ' +
-              'msTransitionEnd ' +
-              'transitionend'
-            );
+            obj.unbind('click');
           })();
 
           // Unbind provided events

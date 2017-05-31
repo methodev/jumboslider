@@ -31,7 +31,8 @@ jQuery(document).ready(function($) {
 
       // Initialize JumboSlider for loop demo
       $('#demo-loop').jumboslider({
-        loop: true
+        loop: true,
+        autoplay: 3000
       });
 
       // Initialize JumboSlider for loop demo

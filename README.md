@@ -154,6 +154,19 @@ $.jumboslider({
 Type: **boolean**
 Default value: **true**
 
+#### transition
+
+Defines the speed of the transition between slides (in milliseconds).
+
+```javascript
+$.jumboslider({
+    transition: 200
+});
+```
+
+Type: **number**
+Default value: **500**
+
 #### loop
 
 Defines whether or not the JumboSlider should be able to start over from the first item after it reaches to the last one and also to jump back to the last item right from the first one.

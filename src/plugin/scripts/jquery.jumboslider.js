@@ -11,6 +11,7 @@
         startPosition: 1,
         arrows: true,
         pagination: true,
+        transition: 500,
         loop: false,
         autoplay: 0
       }
@@ -87,6 +88,8 @@
       init: function(params) {
         var obj = this;
 
+        obj.initializing = true;
+
         // Attach options
         obj.options = plugin.setup.options(params);
 
@@ -104,8 +107,11 @@
         obj.setControllers();
 
         // Set initial width and position
-        obj.setWidth()
-          .setPosition(obj.options.startPosition, 'force');
+
+        setTimeout(function() {
+          obj.setWidth()
+            .setPosition(obj.options.startPosition, obj.initializing);
+        }, 10);
 
         // Bind provided events
         for (var event in obj.options.events) {
@@ -127,18 +133,6 @@
             obj.setWidth().setPosition(obj.currentPosition, 'force');
           });
         }
-
-        obj.overview.bind(
-          'webkitTransitionEnd ' +
-          'otransitionend ' +
-          'oTransitionEnd ' +
-          'msTransitionEnd ' +
-          'transitionend',
-
-          function() {
-            obj.onSlideEnd();
-          }
-        );
 
         return obj.addClass('jumboslider-ready');
       },
@@ -200,8 +194,7 @@
       },
 
       setKeyboard: function() {
-        var obj = this,
-          item = obj.currentItem ? obj.currentItem : $(obj.items[0]);
+        var obj = this;
 
         function action(e) {
           var direction;
@@ -217,15 +210,15 @@
         }
 
         obj.bind('click', function() {
-          if (!item.is('.jumboslider-focused')) {
-            item.attr('tabindex', '1')
+          if (!obj.is('.jumboslider-focused')) {
+            obj.attr('tabindex', '1')
               .focus()
               .addClass('jumboslider-focused');
 
-            item.bind('keyup', action);
+            obj.bind('keyup', action);
 
-            item.bind('blur', function () {
-              item.unbind('keyup', action)
+            obj.bind('blur', function () {
+              obj.unbind('keyup', action)
                 .removeAttr('tabindex')
                 .removeClass('jumboslider-focused');
             });
@@ -261,13 +254,6 @@
               return this;
             },
 
-            checkForce: function() {
-              if (force) { obj.addClass('force'); }
-              else { obj.removeClass('force'); }
-
-              return this;
-            },
-
             transit: function(target, pos, force) {
               obj.transit(target, pos, force);
 
@@ -276,7 +262,7 @@
 
             controllers: function() {
               if (obj.options.pagination && obj.items.length > 1) {
-                obj.pagination.update();
+                obj.pagination.update(force);
               }
               if (obj.options.arrows && obj.items.length > 1) {
                 obj.arrows.update();
@@ -288,7 +274,6 @@
 
         if (!obj.sliding) {
           position.update()
-            .checkForce()
             .transit(obj.overview, left, force)
             .controllers();
 
@@ -363,7 +348,7 @@
         $.extend(pagination, {
           init: function() {
             var pagination = this,
-              current = plugin.dom.pagination.current.clone();
+                current = plugin.dom.pagination.current.clone();
 
             for (var i = 0; i < obj.items.length; i++) {
               var dot = plugin.dom.pagination.dot.clone();
@@ -376,7 +361,7 @@
             pagination.current = current;
 
             pagination.appendTo(obj);
-            pagination.update();
+
             pagination.css({opacity: 1});
 
             pagination.dots.bind('click', function(/*e*/) {
@@ -394,12 +379,12 @@
             return pagination;
           },
 
-          update: function() {
+          update: function(force) {
             obj.pagination.dots.removeClass('current');
             obj.currentPosition = obj.currentPosition || 1;
             var currentDot = $(obj.pagination.dots[obj.currentPosition - 1]);
 
-            obj.transit(pagination.current, currentDot.position().left - 1);
+            obj.transit(pagination.current, currentDot.position().left - 1, force);
             currentDot.addClass('current');
             return this;
           }
@@ -409,23 +394,15 @@
       },
 
       transit: function(target, pos, force) {
-        var obj = this;
+        var obj = this,
+            duration = force ? 0 : obj.options.transition;
 
-        if (navigator.appVersion.indexOf('MSIE 9.') !== -1) {
-          target.animate({ left: pos }, 500, function() {
-            target.onSlideEnd();
-          });
-        }
-        else {
-          target.css({left: pos});
-        }
+        target.animate({ left: pos }, duration, function() {
+          obj.onSlideEnd();
+        });
 
         if (target.is('.jumboslider-overview')) {
-          obj.sliding = true;
-
-          if (force || obj.currentPosition === obj.previousPosition) {
-            obj.sliding = false;
-          }
+          obj.sliding = !(force || obj.currentPosition === obj.previousPosition);
         }
 
         return obj;
@@ -503,15 +480,7 @@
             item.unbind('keyup');
             item.unbind('blur');
 
-            obj.items.unbind('mouseenter click');
-
-            obj.overview.unbind(
-              'webkitTransitionEnd ' +
-              'otransitionend ' +
-              'oTransitionEnd ' +
-              'msTransitionEnd ' +
-              'transitionend'
-            );
+            obj.unbind('click');
           })();
 
           // Unbind provided events

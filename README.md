@@ -125,8 +125,8 @@ $.jumboslider({
 });
 ```
 
-Type: **number**
-Default value: **1**
+Type: **number**  
+Default value: **1**  
 
 #### arrows
 
@@ -138,8 +138,8 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **true**
+Type: **boolean**  
+Default value: **true**  
 
 #### pagination
 
@@ -151,8 +151,8 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **true**
+Type: **boolean**  
+Default value: **true**  
 
 #### transition
 
@@ -164,8 +164,8 @@ $.jumboslider({
 });
 ```
 
-Type: **number**
-Default value: **500**
+Type: **number**  
+Default value: **500**  
 
 #### loop
 
@@ -177,8 +177,8 @@ $.jumboslider({
 });
 ```
 
-Type: **boolean**
-Default value: **false**
+Type: **boolean**  
+Default value: **false**  
 
 #### autoplay
 
@@ -190,8 +190,8 @@ $.jumboslider({
 });
 ```
 
-Type: **number**
-Default value: **0**
+Type: **number**  
+Default value: **0**  
 
 ### Events
 

@@ -12,10 +12,7 @@
         arrows: true,
         pagination: true,
         loop: false,
-        keyboard: true,
-        keyboardFocus: false // requires "keyboard" property to be true
-        // auto: false,
-        // autoDuration: 3000
+        autoplay: 0
       }
     },
 
@@ -110,14 +107,17 @@
         obj.setWidth()
           .setPosition(obj.options.startPosition, 'force');
 
-        // Focus the object when the cursor enters or clicks its area
-        obj.items.bind('mouseenter click', function() { obj.setKeyboard(); });
-
         // Bind provided events
         for (var event in obj.options.events) {
           if (obj.options.events.hasOwnProperty(event)) {
             obj.bind(event, obj.options.events[event]);
           }
+        }
+
+        // Auto play (if turned on)
+        if (obj.options.autoplay > 0) {
+          obj.options.loop = true;
+          obj.autoplay();
         }
 
         // Bind window resize event to update jumboslides position & fluid width
@@ -148,8 +148,9 @@
 
         obj.sliding = false;
 
-        if (obj.options.keyboard && obj.items.length > 1) {
-          obj.setKeyboard();
+        if (obj.options.autoplay > 0) {
+          clearInterval(obj.interval);
+          obj.autoplay();
         }
 
         return obj;
@@ -158,11 +159,7 @@
       setControllers: function() {
         var obj = this;
 
-        // Keyboard arrows (if active)
-        if (obj.options.keyboard) {
-          // Set forced focus (if required)
-          if (obj.options.keyboardFocus) { obj.setKeyboard(); }
-        }
+        obj.setKeyboard();
 
         // Arrows (if active)
         if (obj.options.arrows && obj.items.length > 1) {
@@ -219,19 +216,21 @@
           }
         }
 
-        if (!item.is('.jumboslider-focused')) {
-          item.attr('tabindex', '1')
-            .focus()
-            .addClass('jumboslider-focused');
+        obj.bind('click', function() {
+          if (!item.is('.jumboslider-focused')) {
+            item.attr('tabindex', '1')
+              .focus()
+              .addClass('jumboslider-focused');
 
-          item.bind('keyup', action);
+            item.bind('keyup', action);
 
-          item.bind('blur', function() {
-            item.unbind('keyup', action)
-              .removeAttr('tabindex')
-              .removeClass('jumboslider-focused');
-          });
-        }
+            item.bind('blur', function () {
+              item.unbind('keyup', action)
+                .removeAttr('tabindex')
+                .removeClass('jumboslider-focused');
+            });
+          }
+        });
 
         return obj;
       },
@@ -427,6 +426,18 @@
             obj.sliding = false;
           }
         }
+
+        return obj;
+      },
+
+      autoplay: function() {
+        var obj = this;
+
+        obj.interval = setInterval(function() {
+          var newPos = obj.calculatePosition('next');
+
+          obj.setPosition(newPos);
+        }, obj.options.autoplay);
 
         return obj;
       }

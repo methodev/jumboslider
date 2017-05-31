@@ -99,10 +99,11 @@
         </div>
     </div>
     <div class="demo-loop">
-        <p>This JumboSlider is able to start over from the first item after it reaches to the last one and also to jump back to the last item right from the first one. There are also custom controllers with attached JumboSlider methods.</p>
+        <p>This JumboSlider runs automatically. It is also able to start over from the first item after it reaches to the last one and also to jump back to the last item right from the first one. There are also custom controllers with attached JumboSlider methods.</p>
         <pre class=" language-javascript"><code class="javascript language-javascript">$("#demo-loop").jumboslider({
-        loop: true
-    });</code></pre>
+    loop: true,
+    autoplay: 3000
+});</code></pre>
         <div class="controllers cf"><a class="btn prev" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slidePrev()">Previous</a><a class="btn next" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slideNext()">Next</a></div>
         <div id="demo-loop">
             <div class="jumboslider-viewport">

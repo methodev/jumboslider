@@ -1,5 +1,5 @@
 /*! 
- jQuery JumboSlider Plugin v1.3.2
+ jQuery JumboSlider Plugin v1.4.0
  http://jumboslider.martinmetodiev.com
 
  Copyright (c) 2017 Martin Metodiev
@@ -11,6 +11,10 @@
   height: 100%;
 }
 
+.jumboslider:focus {
+  outline: none;
+}
+
 .jumboslider-viewport {
   position: relative;
   width: 100%;
@@ -19,23 +23,12 @@
 }
 
 .jumboslider-overview {
-  -webkit-transition: left 0.5s ease-in-out;
-  -moz-transition: left 0.5s ease-in-out;
-  -o-transition: left 0.5s ease-in-out;
-  transition: left 0.5s ease-in-out;
   position: relative;
   top: 0;
   left: 0;
   z-index: 1;
   height: 100%;
   min-width: 100%;
-}
-
-.force .jumboslider-overview {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
 }
 
 .jumboslider-item {
@@ -46,10 +39,6 @@
 
 .jumboslider-item:not(:last-of-type) {
   margin-right: 1px;
-}
-
-.jumboslider-item:focus {
-  outline: none;
 }
 
 .jumboslider-ready .jumboslider-item {
@@ -162,10 +151,10 @@
 }
 
 .jumboslider-pagination a::after {
-  -webkit-transition: background-color 0.5s ease-in-out;
-  -moz-transition: background-color 0.5s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   position: absolute;
   top: 0;
   left: 1px;
@@ -188,10 +177,6 @@
 }
 
 .jumboslider-pagination .jumboslider-pagination-current {
-  -webkit-transition: left 0.5s ease-in-out;
-  -moz-transition: left 0.5s ease-in-out;
-  -o-transition: left 0.5s ease-in-out;
-  transition: left 0.5s ease-in-out;
   position: absolute;
   top: -1px;
   z-index: 1;
@@ -213,13 +198,6 @@
   overflow: hidden;
   background-color: #999;
   content: '';
-}
-
-.force .jumboslider-pagination .jumboslider-pagination-current {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
 }
 
 .jumboslider.jumboslider-paginated {

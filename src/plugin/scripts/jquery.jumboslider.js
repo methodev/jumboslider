@@ -236,7 +236,8 @@
       },
 
       setWidth: function() {
-        this.overview.width(((this.items.length + 1) * this.width()) - 1);
+        this.viewport.width(this.width());
+        this.overview.width((this.items.length * this.width()) + this.items.length - 1);
         this.items.width(this.width());
 
         return this;

@@ -1,3 +1,7 @@
+// =========================| Plugin script |========================= //
+
+
+
 ;(function($) {
 
   'use strict';
@@ -209,10 +213,18 @@
           }
         }
 
-        obj.bind('click', function() {
+        $.fn.silentFocus = function() {
+          var x = window.scrollX, y = window.scrollY;
+          this.focus();
+          window.scrollTo(x, y);
+
+          return this;
+        };
+
+        obj.bind('mouseenter click', function() {
           if (!obj.is('.jumboslider-focused')) {
             obj.attr('tabindex', '1')
-              .focus()
+              .silentFocus()
               .addClass('jumboslider-focused');
 
             obj.bind('keyup', action);

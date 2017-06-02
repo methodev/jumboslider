@@ -99,10 +99,16 @@
         </div>
     </div>
     <div class="demo-loop">
-        <p>This JumboSlider runs automatically. It is also able to start over from the first item after it reaches to the last one and also to jump back to the last item right from the first one. There are also custom controllers with attached JumboSlider methods.</p>
+        <p>This JumboSlider has custom controller that uses the plugin's methods. It's also customized with three specific settings:</p>
+        <ol>
+            <li>1. <strong>autoplay</strong>: It slides automatically.</li>
+            <li>2. <strong>loop</strong>: It starts over once it reaches to the last one.</li>
+            <li>3. <strong>transition</strong>: It slides faster than the default speed.</li>
+        </ol>
         <pre class=" language-javascript"><code class="javascript language-javascript">$("#demo-loop").jumboslider({
+    autoplay: 3000,
     loop: true,
-    autoplay: 3000
+    transition: 200
 });</code></pre>
         <div class="controllers cf"><a class="btn prev" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slidePrev()">Previous</a><a class="btn next" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slideNext()">Next</a></div>
         <div id="demo-loop">

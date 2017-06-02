@@ -1,5 +1,5 @@
 /*! 
- jQuery JumboSlider Plugin v1.4.4
+ jQuery JumboSlider Plugin v1.4.5
  http://jumboslider.martinmetodiev.com
 
  Copyright (c) 2017 Martin Metodiev
@@ -135,19 +135,21 @@
   position: relative;
   z-index: 2;
   display: inline-block;
-  width: 22px;
+  width: 30px;
   height: 16px;
   margin: -1px -1px 0;
   overflow: hidden;
   text-decoration: none;
+  border-right: 4px solid #fff;
+  border-left: 4px solid #fff;
 }
 
 .jumboslider-pagination a:hover:not(.current)::after {
-  background-color: #3366cc;
+  background-color: rgba(51, 102, 204, 0.75);
 }
 
 .jumboslider-pagination a:active:not(.current)::after {
-  background-color: rgba(51, 102, 204, 0.75);
+  background-color: #3366cc;
 }
 
 .jumboslider-pagination a::after {
@@ -159,7 +161,7 @@
   top: 0;
   left: 1px;
   z-index: 1;
-  width: 20px;
+  width: calc(100% - 2px);
   height: 100%;
   content: '';
 }
@@ -180,7 +182,7 @@
   position: absolute;
   top: -1px;
   z-index: 1;
-  width: 22px;
+  width: 30px;
   height: 16px;
   text-align: center;
   cursor: default;

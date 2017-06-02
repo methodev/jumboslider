@@ -1,10 +1,14 @@
 /*! 
- jQuery JumboSlider Plugin v1.4.4
+ jQuery JumboSlider Plugin v1.4.5
  http://jumboslider.martinmetodiev.com
 
  Copyright (c) 2017 Martin Metodiev
  Licensed under the MIT license.
 */
+
+// =========================| Plugin script |========================= //
+
+
 
 ;(function($) {
 
@@ -217,10 +221,18 @@
           }
         }
 
-        obj.bind('click', function() {
+        $.fn.silentFocus = function() {
+          var x = window.scrollX, y = window.scrollY;
+          this.focus();
+          window.scrollTo(x, y);
+
+          return this;
+        };
+
+        obj.bind('mouseenter click', function() {
           if (!obj.is('.jumboslider-focused')) {
             obj.attr('tabindex', '1')
-              .focus()
+              .silentFocus()
               .addClass('jumboslider-focused');
 
             obj.bind('keyup', action);

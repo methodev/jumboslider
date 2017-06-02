@@ -32,7 +32,8 @@ jQuery(document).ready(function($) {
       // Initialize JumboSlider for loop demo
       $('#demo-loop').jumboslider({
         loop: true,
-        autoplay: 3000
+        autoplay: 3000,
+        transition: 200
       });
 
       // Initialize JumboSlider for loop demo
@@ -43,10 +44,6 @@ jQuery(document).ready(function($) {
         if (pos) {
           $('#demo-loop').jumboslider().slideTo(pos);
         }
-      });
-
-      $('#demo-loop').jumboslider({
-        loop: true
       });
     });
   });

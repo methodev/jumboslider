@@ -1,3 +1,13 @@
+<a name="1.4.5"></a>
+## 1.4.5 (2017-06-02)
+
+
+### Bug Fixes
+
+* **Silent focus:** Focus slider on mouse enter ([282167b](https://github.com/martinmethod/jumboslider/commit/282167b))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-05-31)
 

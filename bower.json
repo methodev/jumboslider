@@ -13,13 +13,13 @@
     "jQuery",
     "plugin"
   ],
-  "version": "1.4.5",
-  "homepage": "http://jumboslider.martinmetodiev.com",
+  "version": "1.5.0",
+  "homepage": "https://jumboslider.metodiev.dev",
   "authors": [
     {
       "name": "Martin Metodiev",
       "email": "metodiev.martin@gmail.com",
-      "url": "http://martinmetodiev.com"
+      "url": "https://metodiev.dev"
     }
   ],
   "repository": {

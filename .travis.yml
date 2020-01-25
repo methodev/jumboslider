@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-- 7.8
+- 10
 script:
 - printf 'configs/\nsrc/\n.npmignore\n.travis.yml\nCHANGELOG.md\nGruntfile.js\nbower.json\nLICENSE-MIT\npackage.json\nnode_modules/\n.gitignore\ndeployed*' > .gitignore
 - printf '.npmignore\n.travis.yml\nCNAME' > .npmignore
-- printf 'jumboslider.martinmetodiev.com' > CNAME
+- printf 'jumboslider.metodiev.dev' > CNAME
 branches:
   only:
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/

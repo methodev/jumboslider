@@ -10,7 +10,7 @@ JumboSlider is a light and responsive jQuery plugin that provides a simple way t
 
 ## Demo
 
-<a href="http://jumboslider.martinmetodiev.com" target="_blank">jumboslider.martinmetodiev.com</a>
+<a href="http://jumboslider.metodiev.dev" target="_blank">jumboslider.metodiev.dev</a>
 
 ## Getting Started
 

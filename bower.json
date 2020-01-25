@@ -14,12 +14,12 @@
     "plugin"
   ],
   "version": "1.4.5",
-  "homepage": "http://jumboslider.martinmetodiev.com",
+  "homepage": "http://jumboslider.metodiev.dev",
   "authors": [
     {
       "name": "Martin Metodiev",
       "email": "metodiev.martin@gmail.com",
-      "url": "http://martinmetodiev.com"
+      "url": "http://metodiev.dev"
     }
   ],
   "repository": {

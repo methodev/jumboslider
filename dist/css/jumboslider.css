@@ -1,8 +1,8 @@
 /*! 
- jQuery JumboSlider Plugin v1.4.5
- http://jumboslider.martinmetodiev.com
+ jQuery JumboSlider Plugin v1.5.0
+ https://jumboslider.metodiev.dev
 
- Copyright (c) 2017 Martin Metodiev
+ Copyright (c) 2020 Martin Metodiev
  Licensed under the MIT license.
 */
 

@@ -2,7 +2,7 @@
 
 Yet another responsive slider for any kind of content.
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/) [![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)](https://raw.githubusercontent.com/martinmethod/jumboslider/prod/LICENSE-MIT) [![Travis](https://img.shields.io/travis/martinmethod/jumboslider.svg)](https://travis-ci.org/martinmethod/jumboslider) [![David](https://img.shields.io/david/dev/martinmethod/jumboslider.svg)](https://david-dm.org/martinmethod/jumboslider?type=dev) [![GitHub release](https://img.shields.io/github/release/martinmethod/jumboslider.svg)](https://github.com/martinmethod/jumboslider/releases/latest) [![npm](https://img.shields.io/npm/v/jumboslider.svg)](https://www.npmjs.com/package/jumboslider) [![Bower](https://img.shields.io/bower/v/jumboslider.svg)](https://github.com/martinmethod/jumboslider)
+[![Built with Grunt](http://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/) [![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)](https://raw.githubusercontent.com/martinmethod/jumboslider/prod/LICENSE-MIT) [![Travis](https://img.shields.io/travis/martinmethod/jumboslider.svg)](https://travis-ci.org/martinmethod/jumboslider) [![David](https://img.shields.io/david/dev/martinmethod/jumboslider.svg)](https://david-dm.org/martinmethod/jumboslider?type=dev) [![GitHub release](https://img.shields.io/github/release/martinmethod/jumboslider.svg)](https://github.com/martinmethod/jumboslider/releases/latest) [![npm](https://img.shields.io/npm/v/jumboslider.svg)](https://www.npmjs.com/package/jumboslider) [![Bower](https://img.shields.io/bower/v/jumboslider.svg)](https://github.com/martinmethod/jumboslider)
 
 ## Description
 

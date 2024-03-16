@@ -2,21 +2,19 @@
 
 Yet another responsive slider for any kind of content.
 
-[![Built with Grunt](http://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/) [![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)](https://raw.githubusercontent.com/martinmethod/jumboslider/prod/LICENSE-MIT) [![Travis](https://img.shields.io/travis/martinmethod/jumboslider.svg)](https://travis-ci.org/martinmethod/jumboslider) [![David](https://img.shields.io/david/dev/martinmethod/jumboslider.svg)](https://david-dm.org/martinmethod/jumboslider?type=dev) [![GitHub release](https://img.shields.io/github/release/martinmethod/jumboslider.svg)](https://github.com/martinmethod/jumboslider/releases/latest) [![npm](https://img.shields.io/npm/v/jumboslider.svg)](https://www.npmjs.com/package/jumboslider) [![Bower](https://img.shields.io/bower/v/jumboslider.svg)](https://github.com/martinmethod/jumboslider)
-
 ## Description
 
 JumboSlider is a light and responsive jQuery plugin that provides a simple way to transform any kind of content on any web page into a compact and beautiful slideshow. It's easy to setup with the given options and it's also a great module to interact with due to its methods and callback events.
 
 ## Demo
 
-<a href="https://jumboslider.metodiev.dev" target="_blank">jumboslider.metodiev.dev</a>
+<a href="https://jumboslider.mev.bg" target="_blank">jumboslider.mev.bg</a>
 
 ## Getting Started
 
 You can [download the plugin as an archive][zip].
 
-[zip]: https://github.com/martinmethod/jumboslider/zipball/prod
+[zip]: https://github.com/mevbg/jumboslider/zipball/prod
 
 Or you can grab it by using **npm**:
 
@@ -303,4 +301,4 @@ slider.slideTo(5); // will slide to the fifth item
 
 Copyright © 2017 Martin Metodiev. Licensed under the MIT license. [See here for more details.][licence]
 
-[licence]: https://raw.github.com/martinmethod/jumboslider/prod/LICENSE-MIT
+[licence]: https://raw.github.com/mevbg/jumboslider/prod/LICENSE-MIT

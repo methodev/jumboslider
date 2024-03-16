@@ -14,26 +14,26 @@
     "plugin"
   ],
   "version": "1.5.0",
-  "homepage": "https://jumboslider.metodiev.dev",
-  "demo": "https://jumboslider.metodiev.dev",
+  "homepage": "https://jumboslider.mev.bg",
+  "demo": "https://jumboslider.mev.bg",
   "author": {
     "name": "Martin Metodiev",
-    "email": "metodiev.martin@gmail.com",
-    "url": "https://metodiev.dev"
+    "email": "martin@mev.bg",
+    "url": "https://mev.bg"
   },
   "maintainers": [
     {
       "name": "Martin Metodiev",
-      "email": "metodiev.martin@gmail.com",
-      "url": "https://metodiev.dev"
+      "email": "martin@mev.bg",
+      "url": "https://mev.bg"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/martinmethod/jumboslider.git"
+    "url": "git://github.com/mevbg/jumboslider.git"
   },
   "bugs": {
-    "url": "https://github.com/martinmethod/jumboslider/issues"
+    "url": "https://github.com/mevbg/jumboslider/issues"
   },
   "license": "MIT",
   "dependencies": {
@@ -65,14 +65,14 @@
     "lib-sass-data-uri": "0.0.4",
     "load-grunt-config": "^3.0.1",
     "load-grunt-tasks": "^5.1.0",
-    "my-jquery-plugins-assets": " git://github.com/martinmethod/my-jquery-plugins-assets.git#v1.7.1",
+    "my-jquery-plugins-assets": "github:mevbg/my-jquery-plugins-assets#v1.7.1",
     "node-sass-globbing": "0.0.23",
     "time-grunt": "^2.0.0"
   },
   "main": "dist/js/jquery.jumboslider.min.js",
   "directories": {},
   "engines": {
-    "node": ">= 0.8.0"
+    "node": "10.x"
   },
   "scripts": {
     "start": "npm install && grunt clean:all && grunt build"

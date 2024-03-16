@@ -1,0 +1,135 @@
+<div class="general">
+    <h3>General initialization</h3><pre class=" language-javascript"><code class="javascript language-javascript">$.jumboslider();</code></pre>
+    <div class="demo-jumbotron jumboslider">
+        <div class="jumboslider-viewport">
+            <div class="jumboslider-overview">
+                <div class="jumbotron jumboslider-item">
+                    <p>Knowledge speaks, but wisdom listens.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>Our character is what we do when we think no one is looking.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>If you find yourself in a hole, the first thing to do is stop digging.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>That which does not kill us only makes us stronger.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="demo-jumbotron jumboslider">
+        <div class="jumboslider-viewport">
+            <div class="jumboslider-overview">
+                <div class="jumbotron jumboslider-item">
+                    <p>Love all, trust a few.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>The quieter you become, the more you can hear.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>To be old and wise, you must first have to be young and stupid.</p>
+                </div>
+                <div class="jumbotron jumboslider-item">
+                    <p>Don&apos;t think outside the box&mldr; Think like there is no box.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="method">
+    <h3>Method initialization</h3><pre class=" language-javascript"><code class="javascript language-javascript">$(".gallery").jumboslider();</code></pre>
+    <div class="gallery">
+        <div class="jumboslider-viewport">
+            <div class="jumboslider-overview">
+                <div class="jumboslider-item"><img src="assets/demo/images/image001.jpg" width="100%" alt="Photo 01"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image002.jpg" width="100%" alt="Photo 02"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image003.jpg" width="100%" alt="Photo 03"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image004.jpg" width="100%" alt="Photo 04"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image005.jpg" width="100%" alt="Photo 05"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image006.jpg" width="100%" alt="Photo 06"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image007.jpg" width="100%" alt="Photo 07"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image008.jpg" width="100%" alt="Photo 08"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image009.jpg" width="100%" alt="Photo 09"/></div>
+                <div class="jumboslider-item"><img src="assets/demo/images/image010.jpg" width="100%" alt="Photo 10"/></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="options">
+    <h3>Options</h3>
+    <p>This JumboSlider has no arrow controllers.</p>
+    <pre class=" language-javascript"><code class="javascript language-javascript">$("#demo-arrows").jumboslider({
+    arrows: false
+});</code></pre>
+    <div class="demo-iframe" id="demo-arrows">
+        <div class="jumboslider-viewport">
+            <div class="jumboslider-overview">
+                <div class="jumboslider-item">
+                    <div class="holder">
+                        <iframe src="https://www.youtube.com/embed/Cbk980jV7Ao?list=PL456A8C049630174C" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+                <div class="jumboslider-item">
+                    <div class="holder">
+                        <iframe src="https://www.youtube.com/embed/uy0HNWto0UY?list=PL456A8C049630174C" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>This JumboSlider has no pagination controllers.</p>
+    <pre class=" language-javascript"><code class="javascript language-javascript">$("#demo-pagination").jumboslider({
+    pagination: false
+});</code></pre>
+    <div class="demo-iframe" id="demo-pagination">
+        <div class="jumboslider-viewport">
+            <div class="jumboslider-overview">
+                <div class="jumboslider-item">
+                    <div class="holder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d5391.058428209344!2d-73.97210069892472!3d40.75903523708097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sFifth+Avenue%2C+589+5th+Ave%2C+New+York%2C+NY%2C+United+States!5e0!3m2!1sen!2sbg!4v1439303892692" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+                <div class="jumboslider-item">
+                    <div class="holder">
+                        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-73.98555994033813%2C40.75388918270174%2C-73.95723581314087%2C40.76900427024063&amp;layer=mapnik" style="border: 1px solid black;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="demo-loop">
+        <p>This JumboSlider has custom controller that uses the plugin's methods. It's also customized with three specific settings:</p>
+        <ol>
+            <li>1. <strong>autoplay</strong>: It slides automatically.</li>
+            <li>2. <strong>loop</strong>: It starts over once it reaches to the last one.</li>
+            <li>3. <strong>transition</strong>: It slides faster than the default speed.</li>
+        </ol>
+        <pre class=" language-javascript"><code class="javascript language-javascript">$("#demo-loop").jumboslider({
+    autoplay: 3000,
+    loop: true,
+    transition: 200
+});</code></pre>
+        <div class="controllers cf"><a class="btn prev" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slidePrev()">Previous</a><a class="btn next" href="javascript:$(&quot;#demo-loop&quot;).jumboslider().slideNext()">Next</a></div>
+        <div id="demo-loop">
+            <div class="jumboslider-viewport">
+                <div class="jumboslider-overview">
+                    <div class="jumboslider-item"><img src="assets/demo/images/image011.jpg" width="100%" alt="Photo 11"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image012.jpg" width="100%" alt="Photo 12"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image013.jpg" width="100%" alt="Photo 13"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image014.jpg" width="100%" alt="Photo 14"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image015.jpg" width="100%" alt="Photo 15"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image016.jpg" width="100%" alt="Photo 16"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image017.jpg" width="100%" alt="Photo 17"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image018.jpg" width="100%" alt="Photo 18"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image019.jpg" width="100%" alt="Photo 19"/></div>
+                    <div class="jumboslider-item"><img src="assets/demo/images/image020.jpg" width="100%" alt="Photo 20"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="controllers custom-controller">
+            <label for="custom-item-input">Go to custom item:</label>&nbsp;
+            <input class="textfield" id="custom-item-input" type="number" value="7"/>&nbsp;<a class="btn custom-slide-btn" id="custom-slide-btn" href="javascript:;">Slide</a>
+        </div>
+    </div>
+</div>

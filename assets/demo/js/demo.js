@@ -1,0 +1,2 @@
+jQuery(document).ready(function(e){"use strict";e.ajax({url:"assets/demo/demo.html",dataType:"html"}).done(function(o){e(".demo-holder .content").html(o).promise().done(function(){e.jumboslider(),e(".gallery").jumboslider(),e("#demo-arrows").jumboslider({arrows:!1}),e("#demo-pagination").jumboslider({pagination:!1}),e("#demo-loop").jumboslider({loop:!0,autoplay:3e3,transition:200}),e("#custom-slide-btn").click(function(){var o=Math.round(e("#custom-item-input").val()),o=1<=o&&o<=10?o:null;o&&e("#demo-loop").jumboslider().slideTo(o)})})})});
+//# sourceMappingURL=demo.js.map
